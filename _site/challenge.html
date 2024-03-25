@@ -106,24 +106,43 @@
   </header>
 
   <main id="content" class="main-content" role="main">
-    <h1 id="competition-description">Competition description</h1>
+    <h1 id="baselines-code-and-material">Baselines, code, and material:</h1>
 
 <p style="text-align: justify;">
-The rapid advancements in artificial intelligence, particularly in the domain of natural language processing (NLP) propelled by Large Language Models (LLMs), have underscored the transformative potential of these colossal models in shaping modern modes of work and communication. Conse- quently, the prospect of integrating the expansive knowledge capacity of LLMs into edge devices, including smartphones, IoT devices, and in-car systems, holds significant promise within contempo- rary computing ecosystems. However, the massive size of LLMs presents formidable challenges for edge devices, which typically operate with constrained resources. For instance, deploying a modest 10B LLM can demand up to 20GB of main memory (DRAM), even after employing INT8 quantization techniques, a capacity that surpasses the available memory in most commodity smartphones [6]. For example, the HUAWAI P60 boasts an 8GB DRAM capacity, and the iPhone 15 offers a 6GB DRAM. Given that DRAM is shared among the operating system and other applications, mobile apps must not exceed 10% of the DRAM allocation. Additionally, the energy consumption of LLMs presents a big barrier, with a fully charged smartphone, boasting approximately 50 kJ of energy, capable of sustaining a 7B LLM conversation for less than 2 hours at a rate of 10 tokens per second. </p>
+The “starting kit” will be released to provide a starting point for people who are interested in our challenge before May 5th, 2024. This starting kit will provide detailed clarifications on what a submission looks like exactly, and how it will be evaluated and submitted. This starting kit will include an end-to-end submission flow, exemplified with a simple baseline:
+ </p>
+
+<ul>
+  <li>Loading a large language model choosing from Phi-2, Llama 2 7B, or Mamba 7B.</li>
+  <li>Performing the basic L1 norm structured pruning on this model so that the compressed model can fit the smartphone.</li>
+  <li>Evaluating the pruned model on the OpenCompass benchmark. We will provide an easy-to- tun pipeline for participants to evaluate their model on the subset of the lm-evaluation-harness benchmark.</li>
+  <li>Deploying the resulting model on a Huawei Meta 60 and measuring its TPOT. We will provide a tool that can help participants easily deploy their LLMs on Huawei smartphones and measure TPOP.</li>
+  <li>Make a submission on the Leaderboard to see how we fare up against other competitors.</li>
+</ul>
+
+<h1 id="dataset">Dataset:</h1>
 
 <p style="text-align: justify;">
-Our goal is to to push the boundaries of what these powerful LLMs can achieve on edge devices in terms of performance, efficiency, and versatility. Specifically, our goal is to deploy LLMs on edge devices in resource-bounded scenarios and address the following major issues:</p>
+This competition will not evaluate submissions based on the analysis of data. Our competition features two tracks: (1) post-training LLM compression for edge devices; and (2) training edge LLMs from scratch. For both tracks, we will allow the participants to use and only use the C4 dataset [13]. The C4 dataset is a colossal, cleaned version of Common Crawl’s web crawl corpus, which is mainly intended to pre-train language models and word representations. Language models like MPT-7B and T5 are pre-trained with C4 dataset. C4 is a large enough dataset that can make the competition interesting and draw conclusive and statistically significant results.  </p>
+<ul>
+  <li>The C4 dataset is public and can be accessed through: <a href="https://huggingface.co/datasets/c4">HuggingFace</a>
+<br /></li>
+</ul>
 
-<ol>
-  <li>Vast amounts of memory requirements: LLM inference typically requires a significant amount of memory, a major bottleneck for off-the-shelf smartphones. Even high-end smartphones with 8GB are not sufficient for a sophisticated LLM.</li>
-  <li>Prohibitive energy consumption: Moreover, the significant energy consumption during LLM inference presents a formidable challenge to the battery life of smartphones.</li>
-  <li>Large performance loss: SOTA LLMs might require unusually high compression ratios to fit into the memory of edge devices. Such extremely high compression ratios will signifi- cantly challenge the efficacy of existing model compression techniques, where we usually see a substantial performance drop after certain high levels of compression ratios. Therefore, achieving such high compression ratios while maintaining reasonable performance is very challenging.</li>
-  <li>Lack of offline functionality: Most off-the-shelf LLMs necessitate internet connections, which limits their usage in remote areas or in situations where internet access may be intermittent.</li>
-</ol>
+<h1 id="metrics">Metrics:</h1>
 
 <p style="text-align: justify;">
-This is a brand new competition, which focuses on compressing and deploying LLMs on edge devices such as smartphones to push the boundaries of what these edge-device LLMs can achieve in terms of performance, efficiency, and versatility. This challenge is unique and distinct from the conventional model compression due to several factors.
+
+To comprehensively evaluate submissions, we employ a set of rigorously curated metrics, which include:
+
+* Averaged accuracy: One of our primary scoring metrics is the averaged accuracy on a subset of the OpenCompass benchmark. This metric assesses the language capacity of the submission across seven fundamental dimensions.
+
+* Time Per Output Token (TPOT): Another critical performance metric is the average time for submitted models to generate each output token. This measurement is essential for evaluating real-time interaction between users and smartphones. TPOT can be calculated as the overall time taken by the model to generate the full response divided by the number of generated tokens. This value is expected to be measured on a Huawei Meta 60 with 12GB DRAM.
+
+* Parameter count: Submissions should also include the model size, expressed as the parameter count, to indicate the model’s size.
+
 </p>
+
 
 
     <footer class="site-footer">
