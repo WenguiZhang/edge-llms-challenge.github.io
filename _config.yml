@@ -23,7 +23,6 @@ navigation:
   Organizers: "organizers"
   Advisors: "advisors"
   Workshop: "schedule"
-  FAQ: "faq"
   Sponsors: "sponsors"
   Q&A: "question"
 markdown: kramdown
