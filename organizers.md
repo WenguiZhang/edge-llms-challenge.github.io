@@ -16,3 +16,5 @@ layout: default
 * Ajay Jaiswal
 * Zahra Atashgahi
 * Edoardo M. Ponti
+* Lu Yin
+
